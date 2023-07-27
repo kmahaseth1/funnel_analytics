@@ -1,0 +1,51 @@
+[0m10:33:24.998837 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x113340f90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0xa240a8bd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0xa240a8cd0>]}
+
+
+============================== 10:33:25.025440 | ba94d575-8a72-461b-94d7-5ac234cf9961 ==============================
+[0m10:33:25.025440 [info ] [MainThread]: Running with dbt=1.5.3
+[0m10:33:25.027379 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'profiles_dir': '/Users/KushagraMahaseth/.dbt', 'debug': 'False', 'introspect': 'True', 'quiet': 'False', 'version_check': 'True', 'cache_selected_only': 'False', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'log_path': 'logs', 'static_parser': 'True', 'use_colors': 'True', 'log_format': 'default', 'indirect_selection': 'eager', 'fail_fast': 'False', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'no_print': 'None', 'warn_error': 'None', 'use_experimental_parser': 'False', 'log_cache_events': 'False', 'partial_parse': 'True'}
+[0m10:33:39.120184 [debug] [MainThread]: Starter project path: /Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/include/starter_project
+[0m10:33:41.961688 [error] [MainThread]: Encountered an error:
+dlopen(/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/_psycopg.cpython-37m-darwin.so, 2): Library not loaded: @loader_path/.dylibs/libpq.5.14.dylib
+  Referenced from: /Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/_psycopg.cpython-37m-darwin.so
+  Reason: no suitable image found.  Did find:
+	/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/.dylibs/libpq.5.14.dylib: cannot load 'libpq.5.14.dylib' (load command 0x80000034 is unknown)
+	/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/.dylibs/libpq.5.14.dylib: cannot load 'libpq.5.14.dylib' (load command 0x80000034 is unknown)
+[0m10:33:41.972134 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/cli/requires.py", line 86, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/cli/requires.py", line 71, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/cli/main.py", line 459, in init
+    results = task.run()
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/task/init.py", line 307, in run
+    self.create_profile_from_target(adapter, profile_name=project_name)
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/task/init.py", line 173, in create_profile_from_target
+    load_plugin(adapter)
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/adapters/factory.py", line 209, in load_plugin
+    return FACTORY.load_plugin(name)
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/adapters/factory.py", line 58, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/adapters/postgres/__init__.py", line 2, in <module>
+    from dbt.adapters.postgres.connections import PostgresConnectionManager  # noqa
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/dbt/adapters/postgres/connections.py", line 3, in <module>
+    import psycopg2
+  File "/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 51, in <module>
+    from psycopg2._psycopg import (                     # noqa
+ImportError: dlopen(/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/_psycopg.cpython-37m-darwin.so, 2): Library not loaded: @loader_path/.dylibs/libpq.5.14.dylib
+  Referenced from: /Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/_psycopg.cpython-37m-darwin.so
+  Reason: no suitable image found.  Did find:
+	/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/.dylibs/libpq.5.14.dylib: cannot load 'libpq.5.14.dylib' (load command 0x80000034 is unknown)
+	/Users/KushagraMahaseth/opt/anaconda3/lib/python3.7/site-packages/psycopg2/.dylibs/libpq.5.14.dylib: cannot load 'libpq.5.14.dylib' (load command 0x80000034 is unknown)
+
+[0m10:33:41.976020 [debug] [MainThread]: Command `dbt init` failed at 10:33:41.973623 after 17.06 seconds
+[0m10:33:41.976996 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0xa24102d50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0xa240d7110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0xa240d7050>]}
+[0m10:33:41.977890 [debug] [MainThread]: Flushing usage events
