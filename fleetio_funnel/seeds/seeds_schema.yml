@@ -1,0 +1,66 @@
+version: 2
+
+seeds:
+  - name: leads
+    description: leads captured by sales and marketing team
+    columns:
+      - name: id
+        description: primary key for stg_leads
+        tests:
+          - unique
+          - not_null
+      - name: fleet_size
+        description: size of the fleet expressed in categories
+        tests:
+          - accepted_values:
+              values:
+                - "<15"
+                - "15-99"
+                - "100-499"
+                - "500-999"
+                - ">1000"
+
+  - name: accounts
+    description: account information for converted leads
+    columns:
+      - name: id
+        description: primary key for stg_accounts
+        tests:
+          - unique
+          - not_null
+
+  - name: contacts
+    description: contact information for converted leads
+    columns:   
+      - name: id
+        description: primary key for stg_contacts
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: converted lead's account id
+        tests:
+          - relationships:
+              to: ref('stg_accounts')
+              field: id
+      - name: lead_id
+        description: converted lead's id
+        tests:
+          - relationships:
+              to: ref('stg_leads')
+              field: id
+
+  - name: opportunities
+    description: open/close and win/loss status of converted leads
+    columns:
+      - name: id
+        description: primary key for stg_opportunities
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: converted lead's account id
+        tests:
+          - relationships:
+              to: ref('stg_accounts')
+              field: id

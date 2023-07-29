@@ -1,0 +1,168 @@
+version: 2
+
+models:
+  - name: fct_leads_conversion_overall
+    description: Fact table to calculate overall leads conversion rate by different time grains (day, week, and month).
+    columns:
+      - name: created_date
+        description: The date when the lead was created.
+        tests:
+          - not_null
+          - unique
+      - name: created_week
+        description: The week when the lead was created.
+        tests:
+          - not_null
+          - unique
+      - name: created_month
+        description: The month when the lead was created.
+        tests:
+          - not_null
+          - unique
+      - name: total_leads
+        description: The total number of leads created on the given date/week/month.
+        tests:
+          - not_null
+      - name: converted_leads
+        description: The number of leads that were converted on the given date/week/month.
+        tests:
+          - not_null
+      - name: conversion_rate
+        description: The conversion rate calculated as converted_leads / total_leads.
+        tests:
+          - not_null
+
+  - name: dim_converted_leads
+    description: Dimension table containing information about converted leads and their associated account details.
+    columns:
+      - name: contact_id
+        description: The unique identifier for the contact.
+        tests:
+          - not_null
+          - unique
+      - name: account_id
+        description: The unique identifier for the account associated with the converted lead.
+        tests:
+          - not_null
+          - unique
+      - name: lead_id
+        description: The unique identifier for the lead associated with the converted lead.
+        tests:
+          - not_null
+          - unique
+      - name: lead_created_date
+        description: The date when the lead was created.
+        tests:
+          - not_null
+      - name: company
+        description: The company name associated with the account.
+        tests:
+          - not_null
+      - name: account_state
+        description: The state associated with the account.
+        tests:
+          - not_null
+      - name: industry
+        description: The industry associated with the account.
+        tests:
+          - not_null
+      - name: fleet_size
+        description: The fleet size associated with the account.
+        tests:
+          - not_null
+
+  - name: fct_source_conversion
+    description: Fact table to analyze conversion and opportunities by lead source.
+    columns:
+      - name: source
+        description: The source from which the lead was generated.
+        tests:
+          - not_null
+      - name: lead_created_date
+        description: The date when the lead was created.
+        tests:
+          - not_null
+      - name: converted_date
+        description: The date when the lead was converted to an opportunity (if applicable).
+      - name: opportunity_id
+        description: The unique identifier for the opportunity (if applicable).
+      - name: account_id
+        description: The unique identifier for the account associated with the opportunity (if applicable).
+      - name: opportunity_created_date
+        description: The date when the opportunity was created (if applicable).
+      - name: closed_date
+        description: The date when the opportunity was closed (if applicable).
+      - name: is_won
+        description: A boolean flag indicating if the opportunity was won (if applicable).
+
+  - name: fct_industry_conversion
+    description: Fact table to analyze conversion and opportunities by industry.
+    columns:
+      - name: industry
+        description: The industry associated with the lead.
+        tests:
+          - not_null
+      - name: lead_created_date
+        description: The date when the lead was created.
+        tests:
+          - not_null
+      - name: converted_date
+        description: The date when the lead was converted to an opportunity (if applicable).
+      - name: opportunity_id
+        description: The unique identifier for the opportunity (if applicable).
+      - name: account_id
+        description: The unique identifier for the account associated with the opportunity (if applicable).
+      - name: opportunity_created_date
+        description: The date when the opportunity was created (if applicable).
+      - name: closed_date
+        description: The date when the opportunity was closed (if applicable).
+      - name: is_won
+        description: A boolean flag indicating if the opportunity was won (if applicable).
+
+  - name: fct_fleet_size_conversion
+    description: Fact table to analyze conversion and opportunities by fleet size.
+    columns:
+      - name: fleet_size
+        description: The fleet size associated with the lead.
+        tests:
+          - not_null
+      - name: lead_created_date
+        description: The date when the lead was created.
+        tests:
+          - not_null
+      - name: converted_date
+        description: The date when the lead was converted to an opportunity (if applicable).
+      - name: opportunity_id
+        description: The unique identifier for the opportunity (if applicable).
+      - name: account_id
+        description: The unique identifier for the account associated with the opportunity (if applicable).
+      - name: opportunity_created_date
+        description: The date when the opportunity was created (if applicable).
+      - name: closed_date
+        description: The date when the opportunity was closed (if applicable).
+      - name: is_won
+        description: A boolean flag indicating if the opportunity was won (if applicable).
+
+  - name: fct_state_conversion
+    description: Fact table to analyze conversion and opportunities by state.
+    columns:
+      - name: state
+        description: The state associated with the lead.
+        tests:
+          - not_null
+      - name: lead_created_date
+        description: The date when the lead was created.
+        tests:
+          - not_null
+      - name: converted_date
+        description: The date when the lead was converted to an opportunity (if applicable).
+      - name: opportunity_id
+        description: The unique identifier for the opportunity (if applicable).
+      - name: account_id
+        description: The unique identifier for the account associated with the opportunity (if applicable).
+      - name: opportunity_created_date
+        description: The date when the opportunity was created (if applicable).
+      - name: closed_date
+        description: The date when the opportunity was closed (if applicable).
+      - name: is_won
+        description: A boolean flag indicating if the opportunity was won (if applicable).

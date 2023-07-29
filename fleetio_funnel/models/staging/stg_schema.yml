@@ -1,0 +1,132 @@
+version: 2
+
+models:
+  - name: stg_leads
+    description: leads captured by sales and marketing team
+    columns:
+      - name: id
+        description: primary key for stg_leads
+        tests:
+          - unique
+          - not_null
+      - name: fleet_size
+        description: size of the fleet expressed in categories
+        tests:
+          - accepted_values:
+              values:
+                - "<15"
+                - "15-99"
+                - "100-499"
+                - "500-999"
+                - ">1000"
+      - name: created_date
+        description: converts created_at from ISO 8601 format to date format
+        tests:
+          - not_null
+      - name: created_week
+        description: calendar week the lead was created as indentified by the date of the first day of the week
+        tests:
+          - not_null
+      - name: created_month
+        description: month the lead was created
+        tests:
+          - not null
+      - name: converted_date
+        description: converts converted_at from ISO 8601 format to date format
+      - name: converted_week
+        description: calendar week the lead was converted as indentified by the date of the first day of the week
+      - name: converted_month
+        description: month the lead was converted
+
+  - name: stg_accounts
+    description: account information for converted leads
+    columns:
+      - name: id
+        description: primary key for stg_accounts
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_contacts
+    description: contact information for converted leads
+    columns:   
+      - name: id
+        description: primary key for stg_contacts
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: converted lead's account id
+        tests:
+          - relationships:
+              to: ref('stg_accounts')
+              field: id
+      - name: lead_id
+        description: converted lead's id
+        tests:
+          - relationships:
+              to: ref('stg_leads')
+              field: id
+      - name: created_date
+        description: converts created_at from ISO 8601 format to date format
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_leads')
+              field: converted_date
+      - name: created_week
+        description: calendar week the contact was created as indentified by the date of the first day of the week
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_leads')
+              field: converted_week
+      - name: created_month
+        description: month the contact was created
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_leads')
+              field: converted_month
+
+  - name: stg_opportunities
+    description: open/close and win/loss status of converted leads
+    columns:
+      - name: id
+        description: primary key for stg_opportunities
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: converted lead's account id
+        tests:
+          - relationships:
+              to: ref('stg_accounts')
+              field: id
+      - name: created_date
+        description: converts created_at from ISO 8601 format to date format
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_leads')
+              field: converted_date
+      - name: created_week
+        description: calendar week the opportunity was created as indentified by the date of the first day of the week
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_leads')
+              field: converted_week
+      - name: created_month
+        description: month the opportunity was created
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_leads')
+              field: converted_month
+      - name: closed_date
+        description: converts closed_at from ISO 8601 format to date format
+      - name: closed_week
+        description: calendar week the opportunity was closed as indentified by the date of the first day of the week
+      - name: closed_month
+        description: month the opportunity was closed
